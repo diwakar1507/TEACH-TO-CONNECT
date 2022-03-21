@@ -1,0 +1,80 @@
+{% extends 'base.html'%}
+{% load static %}
+<!doctype html>
+<html lang="en">
+{% block head %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Search WikiPedia</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+     .card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    background-color: rgb(107 126 209 / 27%);
+}
+ .container {
+    max-width: 540px;
+    background-color: #dad9d5;
+    text-align: center
+    }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href="{% static 'album.css' %}" rel="stylesheet" >
+  </head>
+  {% endblock %}
+  {% block body %}
+  <body>
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <h2>Search articles</h2>
+    <p>just enter the search query to obtain the results</p>
+        <div class="container">
+      <form method="POST">
+      <div class="input-group mb-3">
+          {% csrf_token %}
+          <input type="text" name="search" class="form-control" aria-label="Username" maxlength="15">
+      </div>
+      <p>
+        <button type="submit" name="submit" value="search" class="btn btn-primary my-2">Search</button>
+      </p>
+      </form>
+    </div>
+    </section>
+    {% if title %}
+    <div class="container">
+        <div class="content-section p-0 mt-5">
+            <a href={{link}} class="p-0 m-0" target="_blank">
+                <div class="custom-header">
+                <br>
+                    <h2>Title :{{title}}</h2>
+                    <br>
+                </div>
+            </a>
+
+            <hr class="p-0 m-0">
+            <p class="description m-5 p-5">
+                {{summary}}
+                 
+            </p>
+            <hr>
+        </div>
+    </div>
+    {% endif %}
+{% endblock body %}

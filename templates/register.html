@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% block body %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+    <title>Registration</title>
+    <style>
+    body{
+       background-image : url('https://www.10wallpaper.com/wallpaper/2560x1600/1711/Study_desk_desk_lamp_notebook_Photo_HD_Wallpaper_2560x1600.jpg') ;
+  font-family: 'Balthazar', serif;
+  margin: 0;
+  color: #cbd0d6;
+  font-size:20px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+     }
+          * {box-sizing: border-box}
+
+form {
+ 	background: #0b0f1552;
+  width:700px;
+  margin:30px auto;
+  border-radius:0.4em;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+}
+
+form:after {
+  content:"";
+  display:block;
+  position:absolute;
+  height:1px;
+  width:100px;
+  left:20%;
+  background:linear-gradient(left, #111, #444, #b6b6b8, #444, #111);
+  top:0;
+}
+
+form:before {
+ 	content:"";
+  display:block;
+  position:absolute;
+  width:8px;
+  height:5px;
+  border-radius:50%;
+  left:34%;
+  top:-7px;
+  box-shadow: 0 0 6px 4px #fff;
+}
+a {
+    color: #c1e3ff;
+    font-size: 20px;
+}
+.inset {
+ 	padding:20px; 
+  padding-bottom: 0px;
+  border-top:1px solid #19191a;
+}
+
+form h1 {
+  font-size:35px;
+  text-shadow:0 1px 0 black;
+  color: #ecf1ce;
+  text-align:center;
+  padding:15px 0;
+  position:relative;
+}
+b, strong {
+    font-size: 20px;
+    font-weight: bolder;
+}
+form h1:after {
+ 	content:"";
+  display:block;
+  width:250px;
+  height:100px;
+  position:absolute;
+  top:0;
+  left:50px;
+  pointer-events:none;
+  transform:rotate(70deg);
+  background:linear-gradient(50deg, rgba(255,255,255,0.15), rgba(0,0,0,0));
+  
+}
+
+label {
+ 	color: #fffcfc;
+  display:block;
+  padding-bottom:9px;
+}
+
+input[type=text],
+input[type=password],
+input[type=email]{
+ 	width:100%;
+  padding:8px 5px;
+  background:linear-gradient(#1f2124, #27292c);
+  border:1px solid #222;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.1);
+  border-radius:0.3em;
+  margin-bottom:20px;
+}
+
+label[for=remember]{
+ 	color:white;
+  display:inline-block;
+  padding-bottom:0;
+  padding-top:5px;
+}
+
+input[type=checkbox] {
+ 	display:inline-block;
+  vertical-align:top;
+}
+
+.p-container {
+ 	padding:0 20px 20px 20px; 
+}
+
+.p-container:after {
+ 	clear:both;
+  display:table;
+  content:"";
+}
+
+.p-container span {
+  display:block;
+  float:left;
+  color:#0d93ff;
+  padding-top:8px;
+}
+
+input[type=submit] {
+ 	padding:5px 20px;
+  border:1px solid rgba(0,0,0,0.4);
+  text-shadow:0 -1px 0 rgba(0,0,0,0.4);
+  float: right border-radius:0.3em;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 10px 10px rgba(255,255,255,0.1);
+    float:right
+  border-radius:0.3em;
+  cursor: pointer;
+  background:#0184ff;
+  color:white;
+  
+  font-weight:bold;
+  cursor:pointer;
+  font-size:13px;
+}
+
+input[type=submit]:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -10px 10px rgba(255,255,255,0.1);
+}
+
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=password]:hover,
+label:hover ~ input[type=text],
+label:hover ~ input[type=password] 
+label:hover ~ input[type=email]{
+ 	background: #dfebea;
+}
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    form {
+ 	background: #15110b;
+  width:300px;
+  margin:30px auto;
+  border-radius:0.4em;
+  border: 1px solid #d0dbc7;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+}
+  }
+    </style>
+  </head>
+  <body>
+    <div>
+  {% for message in messages %}
+     <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      > <strong> {{ message }}</strong>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+        {% endfor %}
+    <form action="register" method="post">
+      {% csrf_token %}
+      <div class="container">
+        <div class="main">
+        <div class="header">
+          <h1>Register</h1>
+           <p><b>Already have an account?</b> <a href="login">Sign in</a>.</p>
+          <hr>
+        </div>
+          <label for="first name"><b>First name</b></label
+          >
+          <input type="text" name="first_name" placeholder="First name" /><br />
+
+          <label for="last name"><b>Last name</b></label
+          >
+          <input type="text" name="last_name" placeholder="Last name" /><br />
+
+          <label for="username"><b>Username</b></label
+          >
+          <input type="text" name="username" placeholder="username" /><br />
+
+          <label for="email"><b>Email</b></label
+          >
+          <input
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            id="email"
+            required
+          /><br />
+    
+          <label for="psw"><b>Password</b></label
+          >
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            id="psw"
+            required
+          />
+
+          <label for="psw-repeat"><b>Repeat Password</b></label
+          >
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="password1"
+            id="psw-repeat"
+            required
+          />
+          <hr />
+          <input type="submit" name="go" id="go" value="Register">
+          <br>
+          <br>
+          <div class="container signin">
+        </div>
+        <hr>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
+{% endblock body %}
